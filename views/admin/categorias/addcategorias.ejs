@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,  shrink-to-fit=no">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/basic.css">
+    <title>Registrar</title>
+</head>
+
+<body>
+    <%- include ('../../partials/_navbar') -%>
+    <%- include ('../../partials/_error') -%>
+    <%- include ('../../partials/_msg') -%>
+    <% if (erros.length>0) { %>
+    <% for( let i = 0; i < erros.length; i++ ) { %>
+    <div class="alert alert-danger"><%= erros[i].texto %></div>
+    <% } %>
+    <% } %>
+
+    <div class="container mt-4">
+        <h1 class="text-white">Nova categoria</h1>
+        <div class="card">
+            <div class="card-body">
+                <form action="/admin/categorias/nova" method="post">
+                    <label for="nome">Nome: </label>
+                    <input type="text" id="nome" name="nome" placeholder="Nome da categoria" class="form-control">
+                    <label for="slug">Slug: </label>
+                    <input type="text" id="slug" name="slug" placeholder="Slug da categoria" class="form-control">
+                    <br>
+                    <button type="submit" class="btn btn-success">Criar categoria</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script src="node_modules/jquery/dist/jquery.js"></script>
+<script src="node_modules/popper.js/dist/umd/popper.js"></script>
+<script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
+
+</html>

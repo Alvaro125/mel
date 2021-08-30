@@ -1,0 +1,81 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+  <a class="navbar-brand" href="/">
+    <img src="/img/mel2.jpeg" width="30" height="30" style="border-radius: 50%;" id="logo" alt="">
+    MEL
+    </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+      </li>
+      
+      <% if (user) { %>
+       <li class="nav-item">
+        <a class="nav-link" href="/categorias">Categorias</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Painel
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="/eventos/painel">Eventos</a>
+          <a class="dropdown-item" href="/fotos/painel">Fotos</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/eventos">Eventos</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/fotos">Fotos</a>
+      </li>
+      <% if (user.eAdmin==1) { %>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Admin
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="/admin/postagens">Posts</a>
+            <a class="dropdown-item" href="/admin/eventos">Eventos</a>
+            <a class="dropdown-item" href="/admin/categorias">Categorias</a>
+            <a class="dropdown-item" href="/admin/contas">Contas</a>
+            <a class="dropdown-item" href="/admin/locais">Locais</a>
+          </div>
+        </li>
+      <% } %>
+      <% if (user.eAdmin==2) { %>
+        <li class="nav-item">
+        <a class="nav-link" href="/admin/postagens">Jornal</a>
+      </li>
+        <% } %>
+      
+      <li class="nav-item active">
+        <a class="nav-link" href="/usuarios/logout">Sair<span class="sr-only">(current)</span></a>
+      </li>
+      
+
+      <% } else { %>
+      <li class="nav-item active">
+        <a class="nav-link bg-success" href="/usuarios/login">Login<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/usuarios/registro">Registrar<span class="sr-only">(current)</span></a>
+      </li>
+      <% } %>
+    </ul>
+    <% if (user) { %>
+      <ul class="navbar-nav ml-auto nav-flex-icons">
+        <li class="nav-item active">
+          <a class="nav-link" href="/usuarios/logout">Sair<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" style="color:white;"><%= user.nome %></a>
+        </li>
+      </ul>
+    <% } %>
+  </div>
+</nav>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,  shrink-to-fit=no">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/basic.css">
+    <script src="https://cdn.ckeditor.com/4.15.0/standard/ckeditor.js"></script>
+    <title>Registrar</title>
+</head>
+
+<body>
+    <%- include ('../../partials/_navbar') -%>
+    <%- include ('../../partials/_error') -%>
+    <%- include ('../../partials/_msg') -%>
+    <% if (erros.length>0) { %>
+    <% for( let i = 0; i < erros.length; i++ ) { %>
+    <div class="alert alert-danger"><%= erros[i].texto %></div>
+    <% } %>
+    <% } %>
+
+    <div class="container mt-4">
+        <div class="card">
+            <div class="card-body">
+                <h4>Nova postagem: </h4>
+                <form action="/admin/postagens/nova" method="POST">
+                    <label for="titulo">Título: </label>
+                    <input type="text" name="titulo" class="form-control" required>
+                    <label for="slug">Slug: </label>
+                    <input type="text" name="slug" class="form-control" required>
+                    <label for="descricao">Descrição: </label>
+                    <input type="text" name="descricao" class="form-control" required>
+                    <label for="conteudo">Conteúdo: </label>
+                    <textarea name="conteudo" class="md-textarea form-control" required></textarea>
+                    <label for="categoria">Categoria: </label>
+                    <select name="categoria" class="custom-select">
+                        <% if (categorias.length>0) { %>
+                        <% categorias.forEach(categorias => { %>
+                        <option value="<%= categorias._id %>"><%= categorias.nome %> </option>
+                        <% }) %>
+                        <% }else{ %>
+                        <option value="0">Nenhuma categoria registrada</option>
+                        <% } %>
+                    </select>
+                    <label for="local">Local: </label>
+                    <select name="local" class="custom-select">
+                        <% if (locais.length>0) { %>
+                        <% locais.forEach(locais => { %>
+                        <option value="<%= locais._id %>"><%= locais.nome %> </option>
+                        <% }) %>
+                        <% }else{ %>
+                        <option value="0">Nenhum Local registrado</option>
+                        <% } %>
+                    </select>
+                    <button class="btn btn-success mt-4" type="submit">Criar postagem</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script>
+    CKEDITOR.replace( 'conteudo' );
+</script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+<script src="/js/bootstrap.js"></script>
+
+</html>

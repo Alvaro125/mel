@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <% if (user) { %>
+   <link rel="stylesheet" href="css/basic.css">
+   <link rel="stylesheet" href="css/principal.css">
+  <% } else { %>
+    <link rel="stylesheet" href="css/basic.css">
+  <% } %>
+  <title>MEL</title>
+</head>
+
+<body class="center">
+  <%- include ('partials/_navbar') -%>
+  <%- include ('partials/_error') -%>
+  <%- include ('partials/_msg') -%>
+  <div class="conteiner mt-4">
+    <% if (user) { %>
+    <div class="container mt-4">
+      <div class="row">
+        <div class="col-sm-4">
+          <a href="/eventos"><button type="button" class="btn btn-primary mt-2 btn-lg btn-block">
+              Eventos</button></a>
+          <a href="/fotos"><button type="button" class="btn btn-primary mt-2 btn-lg btn-block">Fotos</button></a>
+          <a href="/chat"><button type="button" class="btn btn-primary mt-2 btn-lg btn-block">MELChat</button></a>
+        </div>
+        <div class="col-sm-8">
+          <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+              <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+              <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+              <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img height="270" src="/img/Varias pessoas lado a lado cor melhor.jpg" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                </div>
+              </div>
+              <div class="carousel-item text-center">
+                <img height="270" src="/img/procurando varias pessoas lado a lado cor melhor.png" class="d-block " alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                </div>
+              </div>
+              <div class="carousel-item">
+                <img height="270" src="/img/ifms.png" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                </div>
+              </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <hr>
+    <div class="container mt-4">
+      <div class="con">
+        <% eventos.forEach(evento => { %>
+        <div class="Vcard">
+          <div class="imgBox">
+            <img src="/img/categoria/<%= evento.categoria.nome %>.png">
+            <% if (evento.limeteParticipantes == 0) { %>
+              <div class="livre"></div>
+             <% } else { %>
+               <div class="limite"></div>
+             <% } %>
+            <p id="title"><%= evento.titulo%></p>
+          </div>
+          <div class="content">
+            <p>descrição: <%= evento.descricao %></p>
+            <p>Nome: <%= evento.nome %></p>
+            <small>Data de criação: <%= evento.data %></small>
+            <br>
+            <p>Horario: De <%= evento.inicio %> até <%= evento.final %></p>
+            <% if (evento.limeteParticipantes == 0) { %>
+            <p>Evento aberto</p>
+            <% } else { %>
+            <p>Participantes: <%= evento.atualParticipantes %>/<%= evento.limeteParticipantes %></p>
+            <% var arrayids = [] %>
+            <% for( let i = 0; i < evento.atualParticipantes; i++ ) { %>
+            <% arrayids.push(evento.participantes[i].id) %>
+            <% } %>
+            <input type="hidden" name="ids" value="<%= arrayids %> ">
+            <!-- botao de Participaçao -->
+            <% if (arrayids.indexOf(user.id) == -1) { %>
+              <form action="/eventos/participar" method="POST">
+                 <input type="hidden" name="id" value="<%= evento._id %>">
+                 <button type="submit" class="btn btn-primary mt-2">Participar</button>
+             </form>
+             <% }else{ %>
+                 <p class="text-success">Você esta participando desse evento</p>
+             <form action="/eventos/sair" method="POST">
+                 <input type="hidden" name="idsair" value="<%= evento._id %>">
+                 <button type="submit" class="btn btn-danger mt-2">Sair</button>
+             </form>
+             <% } %>
+            <% } %>
+            <p>Categoria: <small><%= evento.categoria.nome %></small></p>
+            <p>Local: <small><%= evento.local.nome %></small></p>
+
+          </div>
+        </div>
+        <% }) %>
+      </div>
+    </div>
+
+    <hr>
+
+    <h2>Fotos</h2>
+
+    <div class="album py-5 bg-primary" id="bg-alfa">
+      <div class="container">
+
+        <div class="row row-cols-1 row-cols-md-3">
+          <% fotos.forEach(foto => { %>
+          <div class="col mb-4">
+            <div class="card" height="100%">
+              <img src="<%= foto.foto %>" class="card-img-top" alt="">
+              <div class="card-body">
+                <h3 class="card-title"><%= foto.criador %> </h3>
+                <p class="card-text"><%= foto.titulo %> </p>
+              </div>
+            </div>
+          </div>
+          <% }) %>
+
+        </div>
+      </div>
+    </div>
+  
+    <% } else { %>
+    <main class="body-flex">
+        <div class="img-init">
+          <h1>MEL</h1>
+          <h2>Mapa de Eventos Locais</h2>
+          <img src="./img/pessoas varias daora nova cor.png" alt="">
+        </div>
+        <div class="coni">
+          <div id="img">
+              <a href="/">
+                  <img id="log" src="/img/mel2.jpeg">
+              </a>
+          </div>
+          <h2>LOGIN</h2>
+          <form action="/usuarios/login" method="post">
+              <div class="inputBox">
+                  <input type="text" required name="email">
+                  <span>Email completo</span>
+              </div>
+              <div class="inputBox">
+                  <input type="password" name="senha" required>
+                  <span>Senha</span>
+              </div>
+              <div class="inputBox">
+                  <input type="submit" value="ENTRAR">
+              </div>
+          </form>
+          <div class="inputBox">
+            <a href="/usuarios/registro"><button id="create">CRIAR CONTA</button></a>
+        </div>
+      </div>
+    </main>
+    <% } %>
+  </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+  integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+  integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+  integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script src="/js/bootstrap.js"></script>
+
+</html>

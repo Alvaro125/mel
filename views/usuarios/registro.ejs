@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,  shrink-to-fit=no">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/painel.css">
+    <title>Registrar</title>
+</head>
+
+<body class="text-center">
+    <%- include ('../partials/_navbar') -%>
+        <%- include ('../partials/_error') -%>
+            <%- include ('../partials/_msg') -%>
+                <% if (erros.length>0) { %>
+                    <% for( let i=0; i < erros.length; i++ ) { %>
+                        <div class="alert alert-danger">
+                            <%= erros[i].texto %>
+                        </div>
+                        <% } %>
+                            <% } %>
+
+                                <div class="con">
+                                    <div id="img">
+                                        <a href="/">
+                                            <img id="log" src="/img/mel2.jpeg">
+                                        </a>
+                                    </div>
+                                    <h2>Cadastro</h2>
+                                    <form action="/usuarios/registro" method="post">
+                                        <div class="inputBox">
+                                            <input type="text" required name="nome">
+                                            <span>Nome completo</span>
+                                        </div>
+                                        <div class="inputBox">
+                                            <input type="email" name="email" required>
+                                            <span>Email</span>
+                                        </div>
+                                        <div class="inputBox">
+                                            <select name="tipo" class="custom-select" required>
+                        <option value="Estudante">Estudante</option>
+                        <option value="Docente">Docente</option>
+                        <option value="Professor">Professor</option>
+                        <option value="Servidor">Servidor</option>
+                      </select>
+                                            <span class="subtext">Tipo</span>
+                                        </div>
+                                        <div class="inputBox">
+                                            <input type="password" name="senha" required>
+                                            <span>Senha</span>
+                                        </div>
+                                        <div class="inputBox">
+                                            <input type="password" name="senha2" required>
+                                            <span>Repitir senha</span>
+                                        </div>
+                                        <div class="inputBox">
+                                            <input type="submit" value="Cadastrar">
+                                        </div>
+                                    </form>
+                                </div>
+
+</body>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script src="/js/bootstrap.js"></script>
+
+</html>

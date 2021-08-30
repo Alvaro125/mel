@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,  shrink-to-fit=no">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/basic.css">
+  <link rel="stylesheet" href="/css/painelblack.css">
+  <title>Editar</title>
+</head>
+
+<body>
+    <%- include ('../partials/_navbar') -%>
+    <%- include ('../partials/_error') -%>
+    <%- include ('../partials/_msg') -%>
+    <% if (erros.length>0) { %>
+    <% for( let i = 0; i < erros.length; i++ ) { %>
+    <div class="alert alert-danger"><%= erros[i].texto %></div>
+    <% } %>
+    <% } %>
+
+<form action="/eventos/edit" method="POST">
+    <div class="conf">
+      
+      <h2>Editar Evento</h2>
+      <input type="hidden" name="id" value="<%= evento._id %>">
+      <div class="gg">
+        <input type="text" name="titulo" class="form-control black" required value="<%=evento.titulo%>">
+        <span class="span">Título</span>
+      </div>
+      <div class="gg">
+        <input type="text" name="descricao" class="form-control black" required value="<%=evento.descricao%>">
+        <span class="span">Descrição</span>
+      </div>
+      <div class="gg">
+        <input type="datetime-local" name="inicio" class="black" required value="<%=evento.inicio%>">
+        <span class="subtext">Inicio</span>
+      </div>
+      <div class="gg">
+        <input type="datetime-local" name="final" class="black" required value="<%=evento.final%>">
+        <span class="subtext">Final</span>
+      </div>
+      <div class="gg" style="margin: 40px 0 20px 0;">
+        <input type="number" name="limeteParticipantes" class="form-control black" required value="<%=evento.limiteParticipantes%>">
+        <span class="subtext1">Numero de participantes (Se o evento for aberto digite '0')</span>
+      </div>
+      <div class="gg">
+        <select name="categoria" class="custom-select black">
+          <% if (categorias.length>0) { %>
+            <% categorias.forEach(categoria => { %>
+             <option value="<%= categoria._id %>"><%= categoria.nome %> </option>
+            <% }) %>
+          <% } else { %>
+            <option value="0">Nenhuma categoria registrada</option>
+          <% } %>
+      </select>
+        <span class="subtext">Categoria</span>
+      </div>
+      <div class="gg">
+        <select name="local" class="custom-select black">
+          <% if (locais.length>0) { %>
+            <% locais.forEach(local => { %>
+             <option value="<%= local._id %>"><%= local.nome %> </option>
+            <% }) %>
+          <% } else { %>
+            <option value="0">Nenhum local registrado</option>
+          <% } %>
+        </select>
+        <span class="subtext">Local</span>
+      </div>
+      <div class="gg">
+        <input type="submit" value="Editar">
+      </div>
+    </div>
+    </form>
+
+</body>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+<script src="/js/bootstrap.js"></script>
+
+</html>

@@ -1,0 +1,286 @@
+* {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    margin-top: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: radial-gradient(circle, rgba(0, 119, 198, 1) 0%, rgba(0, 149, 248, 1) 100%);
+}
+
+.con {
+    position: relative;
+    padding: 70px 40px;
+    background: rgb(255, 255, 255, 0.1);
+    border-radius: 20px;
+    box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.con h2 {
+    color: white;
+    margin-bottom: 45px;
+    line-height: 1em;
+    font-weight: 500;
+    padding-left: 10px;
+    border-bottom: 5px solid rgb(6, 61, 211);
+}
+
+.con .inputBox {
+    position: relative;
+    width: 300px;
+    height: 46px;
+    margin-bottom: 32px;
+}
+
+.con .inputBox:last-child {
+    margin-bottom: 0;
+}
+
+.con .inputBox input {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    border: 1px solid white;
+    background: transparent;
+    padding: 10px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    outline: none;
+    font-size: 16px;
+    color: white;
+    font-weight: 300;
+}
+
+.con .inputBox select {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    border: 1px solid white;
+    background: transparent;
+    padding: 2px;
+    height: 46px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    outline: none;
+    font-size: 16px;
+    color: white;
+    font-weight: 300;
+}
+
+.con .inputBox select option {
+    color: black;
+    padding: 10px;
+}
+
+.con .inputBox span {
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    padding: 10px;
+    display: inline-block;
+    font-size: 16px;
+    color: white;
+    font-weight: 300;
+    transition: 0.5s;
+    pointer-events: none;
+}
+
+.con .inputBox .subtext {
+    position: absolute;
+    top: -32px;
+    left: -10px;
+    padding: 10px;
+    display: inline-block;
+    font-size: 12px;
+    color: white;
+    font-weight: 300;
+    transition: 0.5s;
+    pointer-events: none;
+}
+
+.con .inputBox input:focus~span,
+.con .inputBox input:valid~span {
+    transform: translateX(-10px) translateY(-32px);
+    font-size: 12px;
+}
+
+.con .inputBox input[type="submit"] {
+    background: rgb(0, 119, 199);
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    transition: .5s;
+}
+
+.con .inputBox input[type="submit"]:hover {
+    background: rgb(6, 61, 211);
+}
+
+#log {
+    position: relative;
+    margin-top: -50px;
+    transform: translate(-10%, 20%);
+    max-width: 180px;
+}
+
+#img {
+    position: relative;
+    overflow: hidden;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    justify-content: center;
+}
+#create{
+    background: rgb(3, 102, 168);
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    transition: .5s;
+}
+#create:hover {
+    background: rgb(4, 95, 155);
+}
+form{
+    width: 90%;
+}
+.conf {
+    position: relative;
+    /* padding: 70px 40px; */
+    background: rgb(255, 255, 255, 0.1);
+    border-radius: 20px;
+    box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.conf h2 {
+    color: white;
+    margin-bottom: 45px;
+    line-height: 1em;
+    font-weight: 500;
+    padding-left: 10px;
+    border-bottom: 5px solid rgb(6, 61, 211);
+}
+
+.conf .gg {
+    position: relative;
+    width: 90%;
+    height: 46px;
+    margin-bottom: 32px;
+}
+
+.conf .gg:last-child {
+    margin-bottom: 0;
+}
+
+.conf .gg input {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    border: 1px solid white;
+    background: transparent;
+    padding: 10px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    outline: none;
+    font-size: 16px;
+    color: white;
+    font-weight: 300;
+}
+
+.conf .gg select {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    border: 1px solid white;
+    background: transparent;
+    padding: 2px;
+    height: 46px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    outline: none;
+    font-size: 16px;
+    color: white;
+    font-weight: 300;
+}
+
+.conf .gg select option {
+    color: black;
+    padding: 10px;
+}
+
+.conf .gg span {
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    padding: 10px;
+    display: inline-block;
+    font-size: 16px;
+    color: white;
+    font-weight: 300;
+    transition: 0.5s;
+    pointer-events: none;
+}
+
+.conf .gg .subtext {
+    position: absolute;
+    top: -32px;
+    left: -10px;
+    padding: 10px;
+    display: inline-block;
+    font-size: 12px;
+    color: white;
+    font-weight: 300;
+    transition: 0.5s;
+    pointer-events: none;
+}
+.conf .gg .subtext1 {
+    position: absolute;
+    top: -44px;
+    left: -10px;
+    padding: 10px;
+    display: inline-block;
+    font-size: 12px;
+    color: white;
+    font-weight: 300;
+    transition: 0.5s;
+    pointer-events: none;
+}
+
+.conf .gg input:focus~.span,
+.conf .gg input:valid~.span {
+    transform: translateX(-10px) translateY(-32px);
+    font-size: 12px;
+}
+
+.conf .gg input[type="submit"] {
+    background: rgb(0, 119, 199);
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    transition: .5s;
+}
+
+.conf .gg input[type="submit"]:hover {
+    background: rgb(6, 61, 211);
+}

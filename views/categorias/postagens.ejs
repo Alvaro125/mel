@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,  shrink-to-fit=no">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/basic.css">
+    <title>Registrar</title>
+</head>
+
+<body>
+    <%- include ('../partials/_navbar') -%>
+    <%- include ('../partials/_error') -%>
+    <%- include ('../partials/_msg') -%>
+
+    <div class="container mt-4">
+        <% if (eventos.length>0) { %>
+         <% eventos.forEach(evento => { %>
+            <div class="card">
+                <div class="card-body bg-primary text-white">
+                    <div class="media">
+                        <img src="/img/categoria/<%=evento.categoria.nome%>.png" width="64" height="64" class="mr-3" alt="...">
+                        <div class="media-body">
+                            <h4><%=evento.titulo%></h4>
+                            <p>descrição:<%=evento.descricao%></p>
+                            <p>Nome:<%=evento.nome%></p>
+                            <small>Data de criação: <%=evento.data%></small>
+                            <br>
+                            <p>Horario: De <%=evento.horaInicial%> até <%=evento.horaFinal%></p>
+                            <p>Categoria:<small><%=evento.categoria.nome%></small></p>
+                            <br>
+                            <p>Local:<small><%=evento.local.nome%></small></p>
+                        </div>
+                    </div>
+            
+                </div>
+            </div>
+            <br>
+         <% }) %>
+        <% } else{%>
+            <h5 class="text-danger">nenhuma postagem registrada</h5>
+        <% } %> 
+    </div>
+
+</body>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+<script src="/js/bootstrap.js"></script>
+
+</html>

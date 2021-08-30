@@ -2,25 +2,29 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const Usuario = new Schema({
-    nome: {
-        type: String,
-        required: true
-    },
-    tipo: {
-        type: String,
-        required: true
-    },
-    email: {
-        type: String,
-        required: true
-    },
     eAdmin: {
         type: Number,
         default: 0
     },
-    senha: {
-        type: String,
-        required: true
+    local:{
+        nome:String,
+        email:String,
+        senha:String,
+        tipo:String
+    },
+    google:{
+        id: String,
+        token: String,
+        email:String,
+        nome:String
+    },
+    Isgoogle:{
+        type:Boolean,
+        default: false
+    },
+    Islocal:{
+        type:Boolean,
+        default: false
     }
 })
 

@@ -38,27 +38,28 @@ router.post('/registro', (req, res) => {
     if (erros.length > 0) {
         res.render("usuarios/registro", { erros: erros });
     } else {
-        Usuario.findOne({ email: req.body.email }).lean().then((usuario) => {
+        Usuario.findOne({ 'local.email': req.body.email }).lean().then((usuario) => {
             if (usuario) {
                 req.flash("error_msg", "Já existe uma conta com este Email no nosso sistema")
                 res.redirect('/usuarios/registro');
             } else {
 
                 const novoUsuario = new Usuario({
-                    nome: req.body.nome,
-                    email: req.body.email,
-                    tipo: req.body.tipo,
-                    senha: req.body.senha,
-                    eAdmin:0
+                    'local.nome': req.body.nome,
+                    'local.email': req.body.email,
+                    'local.tipo': req.body.tipo,
+                    'local.senha': req.body.senha,
+                    eAdmin:0,
+                    Islocal:true
                 })
                 bcrypt.genSalt(10, (erro, salt) => {
-                    bcrypt.hash(novoUsuario.senha, salt, (erro, hash) => {
+                    bcrypt.hash(novoUsuario.local.senha, salt, (erro, hash) => {
                         if (erro) {
                             req.flash("error_msg", "Houve um erro durante o salvamento do usuario")
                             res.redirect('/');
                         }
 
-                        novoUsuario.senha = hash;
+                        novoUsuario.local.senha = hash;
 
                         novoUsuario.save().then(() => {
                             req.flash("success_msg", "Usuario criado com sucesso!")
@@ -89,6 +90,16 @@ router.post('/login', (req, res, next) => {
         failureFlash: true
     })(req, res, next)
 });
+
+// send to google to do the authentication
+router.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
+
+// the callback after google has authenticated the user
+router.get('/auth/google/callback',
+    passport.authenticate('google', {
+        successRedirect : '/',
+        failureRedirect : '/'
+    }));
 
 router.get('/logout', (req, res) => {
     req.logout()

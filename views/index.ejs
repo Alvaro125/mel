@@ -89,13 +89,8 @@
             <p>Evento aberto</p>
             <% } else { %>
             <p>Participantes: <%= evento.atualParticipantes %>/<%= evento.limeteParticipantes %></p>
-            <% var arrayids = [] %>
-            <% for( let i = 0; i < evento.atualParticipantes; i++ ) { %>
-            <% arrayids.push(evento.participantes[i].id) %>
-            <% } %>
-            <input type="hidden" name="ids" value="<%= arrayids %> ">
             <!-- botao de Participaçao -->
-            <% if (arrayids.indexOf(user.id) == -1) { %>
+            <% if (evento.participantes.indexOf(user.id.toString()) == -1) { %>
               <form action="/eventos/participar" method="POST">
                  <input type="hidden" name="id" value="<%= evento._id %>">
                  <button type="submit" class="btn btn-primary mt-2">Participar</button>
@@ -171,6 +166,9 @@
           <div class="inputBox">
             <a href="/usuarios/registro"><button id="create">CRIAR CONTA</button></a>
         </div>
+        <div class="inputBox">
+          <a href="/usuarios/auth/google"><button id="create">Google</button></a>
+      </div>
       </div>
     </main>
     <% } %>

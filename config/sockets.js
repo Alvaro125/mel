@@ -26,36 +26,36 @@ module.exports = function (io) {
         evento.chat.forEach(evt => {
           socket.emit('message', formatMessage(evt.user, evt.cont));
         });
-    }).catch((err) => {
+        // Broadcast when a user connects
+        socket.broadcast
+          .to(user.room)
+          .emit(
+            'message',
+            formatMessage(botName, `${user.username} has joined the chat`)
+          );
+
+        // Send users and room info
+        io.to(user.room).emit('roomUsers', {
+          room: evento.titulo,
+          users: getRoomUsers(user.room)
+        });
+      }).catch((err) => {
         req.flash("error_msg", "Houve um erro ao participar do evento!")
         console.log(err)
-    })
+      })
 
-      // Broadcast when a user connects
-      socket.broadcast
-        .to(user.room)
-        .emit(
-          'message',
-          formatMessage(botName, `${user.username} has joined the chat`)
-        );
-
-      // Send users and room info
-      io.to(user.room).emit('roomUsers', {
-        room: user.room,
-        users: getRoomUsers(user.room)
-      });
     });
 
     // Listen for chatMessage
     socket.on('chatMessage', msg => {
       const user = getCurrentUser(socket.id);
       Evento.findOne({ _id: user.room }).then((evento) => {
-        evento.chat.push({user:user.username,cont: msg})
+        evento.chat.push({ user: user.username, cont: msg })
         evento.save()
-    }).catch((err) => {
+      }).catch((err) => {
         req.flash("error_msg", "Houve um erro ao participar do evento!")
         console.log(err)
-    })
+      })
       io.to(user.room).emit('message', formatMessage(user.username, msg));
     });
 

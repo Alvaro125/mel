@@ -42,12 +42,8 @@
                             <p>Eventos aberto</p>
                             <% } else { %>
                             <p>Participantes:<%= eventos.atualParticipantes %>/<%= eventos.limeteParticipantes %></p>
-                            <% var arrayids = [] %> 
-                            <% for( let i = 0; i < eventos.atualParticipantes; i++ ) { %>
-                            <% arrayids.push(eventos.participantes[i].id) %>
-                            <% } %>
-                                <input type="hidden" name="ids" value="<%= arrayids %> ">
-                            <% if (arrayids.indexOf(user.id) == -1) { %>
+                            
+                            <% if (eventos.participantes.indexOf(user.id.toString()) == -1) { %>
                              <form action="/eventos/participar" method="POST">
                                 <input type="hidden" name="id" value="<%= eventos._id %>">
                                 <button type="submit" class="btn btn-primary mt-2">Participar</button>

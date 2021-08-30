@@ -23,6 +23,11 @@ router.get('/painel', Client, (req, res) => {
             var f = evt.final
             evt.inicio = moment(i).format("DD/MM/YYYY HH:mm")
             evt.final = moment(f).format("DD/MM/YYYY HH:mm")
+            box = []
+            evt.participantes.forEach(a => {
+                box.push(a.toString())
+            })
+            evt.participantes = box
         });
         res.render('eventos/painelevento', { eventos: eventos });
     }).catch((err) => {
@@ -40,12 +45,17 @@ router.get('/', Client, (req, res) => {
             var f = evt.final
             evt.inicio = moment(i).format("DD/MM/YYYY HH:mm")
             evt.final = moment(f).format("DD/MM/YYYY HH:mm")
+            box = []
+            evt.participantes.forEach(a => {
+                box.push(a.toString())
+            })
+            evt.participantes = box
         });
         res.render('eventos/evento', { eventos: eventos, erros: erros, });
-        
+
         let current = moment().subtract(1, 'days');
         current = moment.utc(current).format();
-        Evento.update({ final: { $lte: current } }, {"ativo": false}, { safe: true, multi:true }, function(err, obj) {
+        Evento.update({ final: { $lte: current } }, { "ativo": false }, { safe: true, multi: true }, function (err, obj) {
             console.log(err)
         });
     }).catch((err) => {
@@ -82,10 +92,16 @@ router.post('/nova', Client, (req, res) => {
     if (erros.length > 0) {
         res.render('eventos/addevento', { erros: erros });
     } else {
+        if (req.user.Islocal) {
+            var username = req.user.local.nome
+        }
+        if (req.user.Isgoogle) {
+            var username = req.user.google.nome
+        }
         const novoEvento = {
             titulo: req.body.titulo,
             descricao: req.body.descricao,
-            nome: req.user.nome,
+            nome: username,
             inicio: req.body.inicio,
             final: req.body.final,
             categoria: req.body.categoria,
@@ -109,7 +125,7 @@ router.post('/nova', Client, (req, res) => {
 router.get('/edit/:id', Client, (req, res) => {
 
     Evento.findOne({ _id: req.params.id }).lean().then((evento) => {
-            
+
 
         Categoria.find().lean().then((categorias) => {
             Local.find().lean().then((locais) => {
@@ -173,7 +189,7 @@ router.post('/deletar', Client, (req, res) => {
 });
 router.post('/participar', Client, (req, res) => {
     Evento.findOne({ _id: req.body.id }).then((evento) => {
-        evento.participantes.push({nome:req.user.nome,id: req.user._id})
+        evento.participantes.push(req.user._id)
         evento.atualParticipantes += 1
 
         evento.save().then(() => {
@@ -192,7 +208,7 @@ router.post('/participar', Client, (req, res) => {
 
 });
 router.post('/sair', Client, (req, res) => {
-    Evento.update({ _id: req.body.idsair }, { "$pull": { "idParticipantes": { "id": req.user._id }, "participantes":{"nome": req.user.nome} }}, { safe: true, multi:true }, function(err, obj) {
+    Evento.update({ _id: req.body.idsair }, { "$pull": { "participantes": req.user.id } }, { safe: true, multi: true }, function (err, obj) {
         console.log(err)
     });
     Evento.findOne({ _id: req.body.idsair }).then((evento) => {

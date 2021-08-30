@@ -42,8 +42,9 @@ const Evento = new Schema({
         required: false
     },
     participantes:[{
-            nome: String,
-            id: String
+        type: Schema.Types.ObjectId,
+        ref: "usuarios",
+        required: true
     }],
     chat:[{
         user:String,

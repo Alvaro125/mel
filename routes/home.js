@@ -20,14 +20,20 @@ router.get('/', (req, res) => {
     Postagem.find().lean().populate("categoria").sort({ data: "desc" }).then((postagens) => {
         Usuario.find().lean().then((usuario) => {
             Foto.find().lean().then((fotos) => {
-                Evento.find().lean().populate("categoria").populate("local").sort({ data: "desc" }).then((eventos) => {
+                Evento.find().lean().populate("categoria").populate("usuarios").populate("local").sort({ data: "desc" }).then((eventos) => {
                     // { "ativo": true }
                     eventos.forEach(evt => {
                         var i = evt.inicio
                         var f = evt.final
                         evt.inicio = moment(i).format("DD/MM/YYYY HH:mm")
                         evt.final = moment(f).format("DD/MM/YYYY HH:mm")
+                        box=[]
+                        evt.participantes.forEach(a=>{
+                            box.push(a.toString())
+                        })
+                        evt.participantes=box
                     });
+                    console.log(req.user)
                     res.render("index", { postagens: postagens, usuario: usuario, fotos: fotos, eventos: eventos });
                 })
             })

@@ -17,7 +17,7 @@ const Foto = mongoose.model('fotos')
 const { Client } = require("../helpers/Client")
 
 router.get('/painel', Client, (req, res) => {
-    Evento.find({ identificador: req.user._id }).lean().populate("categoria").populate("local").sort({ data: "desc" }).then((eventos) => {
+    Evento.find({ identificador: req.user._id }).lean().populate("categoria").populate("usuarios").populate("local").sort({ data: "desc" }).then((eventos) => {
         eventos.forEach(evt => {
             var i = evt.inicio
             var f = evt.final

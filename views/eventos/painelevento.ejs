@@ -29,7 +29,11 @@
             <p>Categoria:<small><%= evento.categoria.nome %></small></p>
             <ol>
             <% for( let i = 0; i < evento.participantes.length; i++ ) { %>
-            <li><%= evento.participantes[i].nome %></li>
+            <% if (evento.participantes[i].Isgoogle) { %>
+            <li><%= evento.participantes[i].google.nome %></li>
+            <% }else{ %>
+            <li><%= evento.participantes[i].local.nome %></li>
+            <% } %>
             <% } %>
             </ol>
             <% if(evento.limiteParticipantes==evento.atualParticipantes){ %>

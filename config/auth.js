@@ -27,7 +27,7 @@ module.exports = function (passport) {
 
         clientID: '983255394790-g29nn8lajmj1vb4vr9jcgkr4audfm8tr.apps.googleusercontent.com',
         clientSecret: 'K-2e9_SV9k8pN8ck92KHHun3',
-        callbackURL: 'http://localhost:3000/usuarios/auth/google/callback',
+        callbackURL: 'https://melonline.herokuapp.com/usuarios/auth/google/callback',
         passReqToCallback: true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
 
     },

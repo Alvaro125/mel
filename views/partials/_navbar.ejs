@@ -11,7 +11,7 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="/">Home</a>
       </li>
       
       <% if (user) { %>
@@ -19,7 +19,7 @@
         <a class="nav-link" href="/categorias">Categorias</a>
       </li>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" href="/eventos/painel" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Painel
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -54,23 +54,23 @@
         <% } %>
       
       <li class="nav-item active">
-        <a class="nav-link" href="/usuarios/logout">Sair<span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="/usuarios/logout">Sair</a>
       </li>
       
 
       <% } else { %>
       <li class="nav-item active">
-        <a class="nav-link bg-success" href="/usuarios/login">Login<span class="sr-only">(current)</span></a>
+        <a class="nav-link bg-success" href="/usuarios/login">Login</a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="/usuarios/registro">Registrar<span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="/usuarios/registro">Registrar</a>
       </li>
       <% } %>
     </ul>
     <% if (user) { %>
       <ul class="navbar-nav ml-auto nav-flex-icons">
         <li class="nav-item active">
-          <a class="nav-link" href="/usuarios/logout">Sair<span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="/usuarios/logout">Sair</a>
         </li>
         <li class="nav-item">
           <a class="nav-link disabled" style="color:white;"><%= user.nome %></a>

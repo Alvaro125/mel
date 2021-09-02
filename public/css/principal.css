@@ -13,18 +13,18 @@
 .con .Vcard {
     position: relative;
     max-width: 300px;
-    height: 270px;
+    max-height: 270px;
     background: white;
     margin: 30px 10px;
     padding: 20px 15px;
     display: flex;
     flex-direction: column;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
-    transition: 0.3s ease-in-out;
-    margin-bottom: 30px;
+    transition: max-height 0.3s ease-in-out;
+    margin-bottom: 40px;
 }
 .con .Vcard:hover{
-    height: 760px;
+    max-height: 1000px;
 }
 .con .Vcard .imgBox{
     display: flex;
@@ -34,6 +34,7 @@
     width: 260px;
     height: 400px;
     top: -60px;
+    margin-bottom: 20px;
     z-index: 1;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
     text-align: center;

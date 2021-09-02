@@ -18,7 +18,7 @@
     <a href="/eventos/add"><button class="btn btn-success">Criar Eventos</button></a>
 <% if (eventos.length>0) { %>
  <% eventos.forEach(evento => { %>
-    <div class="card text-white">
+    <div class="card text-white w-auto">
         <div class="card-body bg-primary">
             <h4><%= evento.titulo %></h4>
             <p><%= evento.descricao %></p>
@@ -28,13 +28,13 @@
             <p>Data: De <%= evento.inicio %> até <%= evento.final %></p>
             <p>Categoria:<small><%= evento.categoria.nome %></small></p>
             <ol>
-            <% for( let i = 0; i < evento.participantes.length; i++ ) { %>
-            <% if (evento.participantes[i].Isgoogle) { %>
-            <li><%= evento.participantes[i].google.nome %></li>
-            <% }else{ %>
-            <li><%= evento.participantes[i].local.nome %></li>
+            <% evento.participantes.forEach(part=> { %>
+            <% if (part.Isgoogle == true) { %>
+            <li><%= evento.google.nome %></li>
+            <% }else if(part.Islocal == true){ %>
+            <li><%= part.local.nome %></li>
             <% } %>
-            <% } %>
+            <% }) %>
             </ol>
             <% if(evento.limiteParticipantes==evento.atualParticipantes){ %>
                 <div class="alert alert-success">Pronto pra começar</div>

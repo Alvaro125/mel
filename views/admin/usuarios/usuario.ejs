@@ -34,9 +34,16 @@
         <% usuarios.forEach(usuario => { %>
         <tr>
             <th scope="row"><%= usuario._id %></th>
-            <td><%= usuario.email %></td>
-            <td><%= usuario.nome %></td>
-            <td><%= usuario.tipo %></td>
+            <% if (usuario.Isgoogle) { %>
+                <td><%= usuario.google.email %></td>
+                <td><%= usuario.google.nome %></td>
+                <td>usuario Google</td>
+            <% } %>
+            <% if (usuario.Islocal) { %>
+                <td><%= usuario.local.email %></td>
+                <td><%= usuario.local.nome %></td>
+                <td><%= usuario.local.tipo %></td>
+            <% } %>
             <td><%= usuario.eAdmin %></td>
             <td>
                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalLong">

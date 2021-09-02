@@ -23,11 +23,6 @@ router.get('/painel', Client, (req, res) => {
             var f = evt.final
             evt.inicio = moment(i).format("DD/MM/YYYY HH:mm")
             evt.final = moment(f).format("DD/MM/YYYY HH:mm")
-            box = []
-            evt.participantes.forEach(a => {
-                box.push(a.toString())
-            })
-            evt.participantes = box
         });
         res.render('eventos/painelevento', { eventos: eventos });
     }).catch((err) => {

@@ -15,32 +15,55 @@
     <%- include ('../partials/_msg') -%>
 
     <div class="container mt-4">
-        <% if (eventos.length>0) { %>
-         <% eventos.forEach(evento => { %>
-            <div class="card">
-                <div class="card-body bg-primary text-white">
-                    <div class="media">
-                        <img src="/img/categoria/<%=evento.categoria.nome%>.png" width="64" height="64" class="mr-3" alt="...">
-                        <div class="media-body">
-                            <h4><%=evento.titulo%></h4>
-                            <p>descrição:<%=evento.descricao%></p>
-                            <p>Nome:<%=evento.nome%></p>
-                            <small>Data de criação: <%=evento.data%></small>
-                            <br>
-                            <p>Horario: De <%=evento.horaInicial%> até <%=evento.horaFinal%></p>
-                            <p>Categoria:<small><%=evento.categoria.nome%></small></p>
-                            <br>
-                            <p>Local:<small><%=evento.local.nome%></small></p>
+        <% if (eventos) { %>
+            <div class="row row-cols-1 row-cols-md-2">
+                <% eventos.forEach(eventos => { %>
+                <div class="col-sm-6">
+                    <div class="card eventos">
+                        <div class="card-body eventos bg-primary text-white">
+                            <div class="media eventos">
+                                <img src="/img/categoria/<%= eventos.categoria.nome %>.png" class="align-self-start mr-3 rounded-circle w-25" alt="...">
+                                <div class="media-body">
+                                    <h4><%= eventos.titulo %></h4>
+                                    <p>descrição:<%= eventos.descricao %></p>
+                                    <p>Nome:<%= eventos.nome %></p>
+                                    <small>Data de criação: <%= eventos.data %></small>
+                                    <br>
+                                    <p>Horario: De <%= eventos.inicio %> até <%= eventos.final %></p>
+                                    <% if (eventos.limeteParticipantes == 0) { %>
+                                    <p>Eventos aberto</p>
+                                    <% } else { %>
+                                    <p>Participantes:<%= eventos.atualParticipantes %>/<%= eventos.limeteParticipantes %></p>
+                                    
+                                    <% if (eventos.participantes.indexOf(user.id.toString()) == -1) { %>
+                                     <form action="/eventos/participar" method="POST">
+                                        <input type="hidden" name="id" value="<%= eventos._id %>">
+                                        <button type="submit" class="btn btn-primary mt-2">Participar</button>
+                                    </form>
+                                    <% }else{ %>
+                                        <p class="text-success">Você esta participando desse evento</p>
+                                    <form action="/eventos/sair" method="POST">
+                                        <input type="hidden" name="idsair" value="<%= eventos._id %>">
+                                        <button type="submit" class="btn btn-danger mt-2">Sair</button>
+                                    </form>
+                                    <% } %>
+                                    
+                                    
+                                    <% } %>
+                                    <p>Categoria:<small><%= eventos.categoria.nome %></small></p>
+                                    <p>Local:<small><%= eventos.local.nome %></small></p>
+                                </div>
+                            </div>
+        
                         </div>
                     </div>
-            
                 </div>
+        
+                <% }) %>
             </div>
-            <br>
-         <% }) %>
-        <% } else{%>
-            <h5 class="text-danger">nenhuma postagem registrada</h5>
-        <% } %> 
+            <% } else {%>
+            <p>Nenhuma Postagem registrada</p>
+            <% } %>
     </div>
 
 </body>

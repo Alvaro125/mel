@@ -27,11 +27,11 @@ router.get('/', (req, res) => {
                         var f = evt.final
                         evt.inicio = moment(i).format("DD/MM/YYYY HH:mm")
                         evt.final = moment(f).format("DD/MM/YYYY HH:mm")
-                        box=[]
-                        evt.participantes.forEach(a=>{
+                        box = []
+                        evt.participantes.forEach(a => {
                             box.push(a.toString())
                         })
-                        evt.participantes=box
+                        evt.participantes = box
                     });
                     console.log(req.user)
                     res.render("index", { postagens: postagens, usuario: usuario, fotos: fotos, eventos: eventos });
@@ -85,10 +85,22 @@ router.get('/categorias', (req, res) => {
     })
 });
 
-router.get('/categorias/:slug', (req, res) => {
+router.get('/categorias/:slug', Client, (req, res) => {
     Categoria.findOne({ slug: req.params.slug }).lean().then((categoria) => {
         if (categoria) {
             Evento.find({ categoria: categoria._id }).populate('local').populate('categoria').lean().then((eventos) => {
+                var erros = []
+                eventos.forEach(evt => {
+                    var i = evt.inicio
+                    var f = evt.final
+                    evt.inicio = moment(i).format("DD/MM/YYYY HH:mm")
+                    evt.final = moment(f).format("DD/MM/YYYY HH:mm")
+                    box = []
+                    evt.participantes.forEach(a => {
+                        box.push(a.toString())
+                    })
+                    evt.participantes = box
+                });
                 res.render('categorias/postagens', { eventos: eventos, categoria: categoria });
             }).catch((err) => {
                 req.flash("error_msg", "houve um erro ao listar os eventos")

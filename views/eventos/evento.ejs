@@ -24,13 +24,13 @@
     <a href="/eventos/add"><button class="btn btn-success">Criar Eventos</button></a>
     <a href="/eventos/painel"><button type="button" class="btn btn-success">Meus Eventos</button></a>
     <% if (eventos) { %>
-    <div class="row">
+    <div class="row row-cols-1 row-cols-md-2">
         <% eventos.forEach(eventos => { %>
         <div class="col-sm-6">
             <div class="card eventos">
                 <div class="card-body eventos bg-primary text-white">
                     <div class="media eventos">
-                        <img src="/img/categoria/<%= eventos.categoria.nome %>.png" class="icone align-self-center mr-3 rounded-circle" width="200px" alt="...">
+                        <img src="/img/categoria/<%= eventos.categoria.nome %>.png" class="align-self-start mr-3 rounded-circle w-25" alt="...">
                         <div class="media-body">
                             <h4><%= eventos.titulo %></h4>
                             <p>descrição:<%= eventos.descricao %></p>
